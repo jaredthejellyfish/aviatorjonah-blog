@@ -1,0 +1,14 @@
+{
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": "../blog-2",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  },
+  "include": ["./src/env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["dist"]
+}

@@ -1,0 +1,42 @@
+---
+import HeadSEO from '@/components/HeadSEO.astro'
+import { ViewTransitions } from 'astro:transitions'
+
+interface Props {
+  title?: string | undefined
+  description?: string | undefined
+  ogImage?: URL | undefined
+}
+
+const { title, description, ogImage } = Astro.props
+---
+
+<script>
+  (function() {
+    const getThemePreference = () => {
+      if (localStorage.getItem('theme')) {
+        return localStorage.getItem('theme');
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    };
+    const isDark = getThemePreference() === 'dark';
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  })();
+</script>
+
+
+<html lang="en">
+  <head>
+    <HeadSEO title={title} description={description} ogImage={ogImage} />
+    <ViewTransitions />
+  </head>
+  <body class="min-h-screen bg-background font-sans antialiased">
+    <slot />
+  </body>
+</html>
