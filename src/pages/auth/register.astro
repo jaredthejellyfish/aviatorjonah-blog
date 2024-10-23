@@ -5,7 +5,7 @@ import ThemeToggle from '@/components/ReactThemeToggle'
 import Footer from '@/components/Footer.astro'
 import { Home, UserPlus } from 'lucide-astro'
 
-const { cookies, redirect } = Astro
+const { cookies } = Astro
 
 const accessToken = cookies.get('sb-access-token')
 const refreshToken = cookies.get('sb-refresh-token')

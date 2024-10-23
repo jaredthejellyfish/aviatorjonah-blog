@@ -14,7 +14,6 @@ type Props = {
 }
 
 function User({ user }: { user: ServerUser }) {
-  console.log(user)
   return (
     <img
       src={user?.picture ?? 'no image'}

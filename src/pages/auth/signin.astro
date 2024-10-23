@@ -5,7 +5,7 @@ import ThemeToggle from '@/components/ReactThemeToggle'
 import Footer from '@/components/Footer.astro'
 import { Home, Lock } from 'lucide-astro'
 
-const { cookies, redirect } = Astro
+const { cookies } = Astro
 
 const accessToken = cookies.get('sb-access-token')
 const refreshToken = cookies.get('sb-refresh-token')
@@ -112,7 +112,7 @@ if (accessToken && refreshToken) {
                 </label>
               </div>
               <a
-                href="/forgot-password"
+                href="/auth/forgot-password"
                 class="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
               >
                 Forgot password?
