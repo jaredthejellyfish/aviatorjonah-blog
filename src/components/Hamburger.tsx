@@ -31,12 +31,18 @@ function Hamburger() {
         <div className="absolute right-0 mt-2 w-48 dark:bg-white bg-black text-white dark:text-black rounded-md shadow-lg z-50">
           <ul className="py-1">
             <li>
-              <a href="/" className="block px-4 py-2 hover:bg-neutral-900 dark:hover:bg-gray-100">
+              <a
+                href="/"
+                className="block px-4 py-2 hover:bg-neutral-900 dark:hover:bg-gray-100"
+              >
                 Home
               </a>
             </li>
             <li>
-              <a href="/about" className="block px-4 py-2 hover:bg-neutral-900 dark:hover:bg-gray-100">
+              <a
+                href="/about"
+                className="block px-4 py-2 hover:bg-neutral-900 dark:hover:bg-gray-100"
+              >
                 About
               </a>
             </li>
@@ -49,7 +55,10 @@ function Hamburger() {
               </a>
             </li>
             <li>
-              <a href="/contact" className="block px-4 py-2 hover:bg-neutral-900 dark:hover:bg-gray-100">
+              <a
+                href="/contact"
+                className="block px-4 py-2 hover:bg-neutral-900 dark:hover:bg-gray-100"
+              >
                 Contact
               </a>
             </li>

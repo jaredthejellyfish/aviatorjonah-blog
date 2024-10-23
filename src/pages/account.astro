@@ -1,0 +1,248 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getUser } from '@/lib/supabase'
+import { Button } from '@/components/ui/button'
+import Footer from '@/components/Footer.astro'
+import { User, Settings, BookOpen, History, Home } from 'lucide-astro'
+import ThemeToggle from '@/components/ReactThemeToggle'
+
+const { cookies } = Astro
+
+const isLoggedIn =
+  cookies.get('sb-access-token') && cookies.get('sb-refresh-token')
+    ? true
+    : false
+
+const { user } = isLoggedIn ? await getUser() : { user: null }
+
+if (!isLoggedIn) {
+  return Astro.redirect('/signin')
+}
+---
+
+<BaseLayout
+  title="Account - AviatorJonah"
+  description="Manage your AviatorJonah account settings and view your profile."
+>
+  <main class="bg-white dark:bg-neutral-900">
+    <!-- Navigation Bar -->
+    <nav
+      class="border-b border-gray-200 bg-white/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-900/50"
+    >
+      <div class="flex items-center justify-between">
+        <a
+          href="/"
+          class="flex items-center gap-2 text-lg font-medium text-gray-900 transition-opacity hover:opacity-80 dark:text-white"
+        >
+          <Home class="h-5 w-5" />
+          <span>Back to Home</span>
+        </a>
+        <div class="flex items-center gap-4">
+          <span class="hidden text-sm text-gray-600 dark:text-gray-400 sm:block"
+            >Logged in as {user?.email}</span
+          >
+          <ThemeToggle client:load />
+        </div>
+      </div>
+    </nav>
+
+    <section class="mt-6 flex flex-col gap-4 px-6">
+      <span class="text-4xl font-light text-gray-900 dark:text-white"
+        >Account</span
+      >
+      <span class="text-lg font-extralight text-gray-600 dark:text-gray-400">
+        Manage your profile and account settings
+      </span>
+    </section>
+
+    <section class="p-2">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <!-- Profile Info Card -->
+        <div class="flex flex-col gap-4">
+          <div class="relative h-[300px] rounded-lg shadow-lg">
+            <div
+              class="flex flex-col p-6"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+                borderRadius: '0.5rem',
+              }}
+            >
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white/50 p-2 dark:border-neutral-700 dark:bg-neutral-700/50"
+              >
+                <User class="text-gray-900 opacity-70 dark:text-white" />
+              </div>
+              <div class="mt-4">
+                <h2 class="text-2xl font-bold dark:text-white">
+                  {
+                    !!user?.given_name
+                      ? `${user?.given_name} ${user?.family_name}`
+                      : user?.email
+                  }
+                </h2>
+                <p class="mt-2 text-sm opacity-70 dark:text-white">
+                  Member since {
+                    new Date(user?.created_at ?? '').toLocaleDateString()
+                  }
+                </p>
+              </div>
+              <Button className="mt-4">Edit Profile</Button>
+              <a
+                href="/api/auth/signout"
+                class="w-full"
+                data-astro-prefetch="false"
+              >
+                <Button className="mt-4 bg-red-600 text-white hover:bg-red-700"
+                  >Sign Out</Button
+                >
+              </a>
+            </div>
+            <div
+              class="h-full w-full rounded-lg bg-gray-100 dark:bg-neutral-800"
+            >
+            </div>
+          </div>
+
+          <!-- Settings Card -->
+          <div class="relative h-[300px] rounded-lg shadow-lg">
+            <div
+              class="flex flex-col p-6"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+                borderRadius: '0.5rem',
+              }}
+            >
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white/50 p-2 dark:border-neutral-700 dark:bg-neutral-700/50"
+              >
+                <Settings class="text-gray-900 opacity-70 dark:text-white" />
+              </div>
+              <div class="mt-4 text-xl font-bold dark:text-white">
+                Account Settings
+              </div>
+              <div class="mt-2 font-medium opacity-70 dark:text-white">
+                Manage your preferences, notifications, and security settings
+              </div>
+              <Button className="mt-4">Manage Settings</Button>
+            </div>
+            <div
+              class="h-full w-full rounded-lg bg-gray-100 dark:bg-neutral-800"
+            >
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Section -->
+        <div class="col-span-1 md:col-span-2">
+          <div class="grid grid-cols-1 gap-4">
+            <!-- Course Progress -->
+            <div class="relative h-[300px] rounded-lg">
+              <div
+                class="flex flex-col p-6"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  bottom: 0,
+                  right: 0,
+                  background:
+                    'radial-gradient(circle, rgba(0, 0, 0, 0.5) 65%, transparent 150%)',
+                  borderRadius: '0.5rem',
+                }}
+              >
+                <div
+                  class="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white/50 p-2 dark:border-neutral-700 dark:bg-neutral-700/50"
+                >
+                  <BookOpen class="text-gray-900 opacity-70 dark:text-white" />
+                </div>
+                <div class="mt-4 text-xl font-bold text-white">
+                  Course Progress
+                </div>
+                <div class="mt-4 grid grid-cols-2 gap-4">
+                  <div>
+                    <span class="text-3xl font-semibold text-white">3</span>
+                    <p class="text-sm text-white opacity-70">
+                      Courses in Progress
+                    </p>
+                  </div>
+                  <div>
+                    <span class="text-3xl font-semibold text-white">2</span>
+                    <p class="text-sm text-white opacity-70">
+                      Completed Courses
+                    </p>
+                  </div>
+                </div>
+                <Button className="mt-4 bg-white text-black"
+                  >View All Courses</Button
+                >
+              </div>
+              <img
+                src="/plane.jpg"
+                alt="Course Progress"
+                class="h-full w-full rounded-lg object-cover"
+              />
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="relative h-[300px] rounded-lg">
+              <div
+                class="flex flex-col p-6"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  bottom: 0,
+                  right: 0,
+                  background:
+                    'radial-gradient(circle, rgba(0, 0, 0, 0.5) 65%, transparent 150%)',
+                  borderRadius: '0.5rem',
+                }}
+              >
+                <div
+                  class="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white/50 p-2 dark:border-neutral-700 dark:bg-neutral-700/50"
+                >
+                  <History class="text-gray-900 opacity-70 dark:text-white" />
+                </div>
+                <div class="mt-4 text-xl font-bold text-white">
+                  Recent Activity
+                </div>
+                <div class="mt-4 flex flex-col gap-2">
+                  <div
+                    class="rounded-lg bg-white/10 p-3 dark:bg-neutral-800/50"
+                  >
+                    <p class="font-medium text-white">
+                      Completed Chapter 3: Navigation Basics
+                    </p>
+                    <p class="text-sm text-white opacity-70">2 days ago</p>
+                  </div>
+                  <div
+                    class="rounded-lg bg-white/10 p-3 dark:bg-neutral-800/50"
+                  >
+                    <p class="font-medium text-white">
+                      Started Course: Advanced Weather Patterns
+                    </p>
+                    <p class="text-sm text-white opacity-70">5 days ago</p>
+                  </div>
+                </div>
+              </div>
+              <img
+                src="https://www.stantec.com/content/dam/stantec/images/ideas/blogs/002/how-long-airport-runway-1.jpg"
+                alt="Recent Activity"
+                class="h-full w-full rounded-lg object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <Footer />
+  </main>
+</BaseLayout>

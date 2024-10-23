@@ -5,7 +5,11 @@ export default {
   semi: false,
   singleQuote: true,
   endOfLine: 'lf',
-  plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss', '@trivago/prettier-plugin-sort-imports'],
+  plugins: [
+    'prettier-plugin-astro',
+    'prettier-plugin-tailwindcss',
+    '@trivago/prettier-plugin-sort-imports',
+  ],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
   importOrder: [

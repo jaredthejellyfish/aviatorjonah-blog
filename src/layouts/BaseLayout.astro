@@ -12,24 +12,23 @@ const { title, description, ogImage } = Astro.props
 ---
 
 <script>
-  (function() {
+  ;(function () {
     const getThemePreference = () => {
       if (localStorage.getItem('theme')) {
-        return localStorage.getItem('theme');
+        return localStorage.getItem('theme')
       }
       return window.matchMedia('(prefers-color-scheme: dark)').matches
         ? 'dark'
-        : 'light';
-    };
-    const isDark = getThemePreference() === 'dark';
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+        : 'light'
     }
-  })();
+    const isDark = getThemePreference() === 'dark'
+    if (isDark) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  })()
 </script>
-
 
 <html lang="en">
   <head>
