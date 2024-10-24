@@ -5,7 +5,9 @@ import type { Articles, ServerUser } from '@/lib/supabase'
 
 import Hamburger from './Hamburger'
 import ThemeToggle from './ReactThemeToggle'
+import SearchWithResults from './Search'
 import { Button } from './ui/button'
+import User from './User'
 
 type Props = {
   topThreeArticles: NonNullable<Articles>
@@ -13,15 +15,7 @@ type Props = {
   user: ServerUser | null
 }
 
-function User({ user }: { user: ServerUser }) {
-  return (
-    <img
-      src={user?.picture ?? 'no image'}
-      alt={user?.given_name ?? 'no name'}
-      className="h-10 w-10 rounded-full border-2 border-white/50 object-contain ml-5 hidden sm:block"
-    />
-  )
-}
+
 
 function HeroSection({ topThreeArticles, isLoggedIn, user }: Props) {
   const [currentArticle, setCurrentArticle] = useState(0)
@@ -38,34 +32,29 @@ function HeroSection({ topThreeArticles, isLoggedIn, user }: Props) {
   }
 
   return (
-    <div className="w-fullrelative flex h-screen items-center justify-center p-2">
+    <div className="w-full relative flex h-screen items-center justify-center p-2">
       <div className="absolute left-2 right-2 top-2 h-1/3 rounded-lg bg-gradient-to-b from-black/50 to-transparent">
         <div className="mt-1 flex h-20 w-full items-center justify-between px-0 pr-4 text-white sm:mt-4 sm:px-10">
-          <a href="/" className="flex items-center gap-6 lg:w-1/3">
-            <img
-              src="/logo.png"
-              alt="logo"
-              className="h-14 w-40 scale-75 object-cover sm:scale-100"
-            />
-          </a>
+          <div className='flex flex-row items-center justify-start gap-x-10'>
+            <a href="/" className="flex items-center gap-6">
+              <img
+                src="/logo.png"
+                alt="logo"
+                className="h-14 w-40 scale-75 object-cover sm:scale-100"
+              />
+            </a>
 
-          <div className="hidden w-1/3 items-center justify-center gap-6 lg:flex">
-            <span className="text-lg font-bold text-white"> Home </span>
-            <span className="text-lg font-bold text-white"> About </span>
-            <span className="text-lg font-bold text-white"> About </span>
-            <span className="text-lg font-bold text-white"> About </span>
+            <div className="hidden items-center justify-center gap-6 lg:flex">
+              <span className="text-lg font-bold text-white"> Home </span>
+              <span className="text-lg font-bold text-white"> About </span>
+              <span className="text-lg font-bold text-white"> About </span>
+              <span className="text-lg font-bold text-white"> About </span>
+            </div>
           </div>
 
           <div className="relative flex items-center justify-end lg:w-1/3">
             <ThemeToggle />
-            <div className="ml-3 hidden max-w-[350px] flex-1 items-center justify-between gap-2 rounded-lg bg-white/10 p-2 px-4 text-white sm:flex">
-              <input
-                type="text"
-                placeholder="Search"
-                className="w-full bg-transparent outline-none"
-              />
-              <Search className="h-5 w-5" />
-            </div>
+            <SearchWithResults />
             <a href={isLoggedIn ? '/account' : '/auth/signin'}>
               {isLoggedIn ? (
                 <User user={user} />

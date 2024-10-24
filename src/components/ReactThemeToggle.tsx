@@ -56,15 +56,16 @@ const ThemeToggle = () => {
   }
 
   return (
-    <Button
-      size="icon"
-      onClick={handleToggleClick}
-      className="bg-white text-black dark:hover:text-black hover:text-white"
-    >
-      <SunIcon className="h-[1.5rem] w-[1.3rem] dark:hidden" />
-      <MoonIcon className="hidden h-5 w-5 dark:block" />
-      <span className="sr-only">Toggle theme</span>
-    </Button>
+    <div className='flex items-center justify-center'>
+      <Button
+        onClick={handleToggleClick}
+        className="bg-white text-black dark:hover:text-black hover:text-white w-[40px] h-[40px] p-0"
+      >
+        <SunIcon className="h-[1.5rem] w-[1.3rem] dark:hidden" />
+        <MoonIcon className="hidden h-5 w-5 dark:block" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+    </div>
   )
 }
 

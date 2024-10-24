@@ -1,7 +1,7 @@
-import astroParser from 'astro-eslint-parser';
-import astroPlugin from 'eslint-plugin-astro';
-import typescriptParser from '@typescript-eslint/parser';
-import typescriptPlugin from '@typescript-eslint/eslint-plugin';
+import typescriptPlugin from '@typescript-eslint/eslint-plugin'
+import typescriptParser from '@typescript-eslint/parser'
+import astroParser from 'astro-eslint-parser'
+import astroPlugin from 'eslint-plugin-astro'
 
 export default [
   {
@@ -42,4 +42,4 @@ export default [
       // Add any JavaScript/TypeScript-specific ESLint rules here
     },
   },
-];
+]
