@@ -48,7 +48,7 @@ export default function SearchBar() {
       <input
         type="text"
         placeholder="Search"
-        className="w-full bg-transparent outline-none"
+        className="w-full bg-transparent outline-none placeholder:text-white/80"
         value={searchQuery}
         onChange={(e) => handleSearch(e.target.value)}
       />

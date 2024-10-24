@@ -1,5 +1,5 @@
 import { ChevronDown } from 'lucide-react'
-import React, { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import type { Articles } from '@/lib/supabase'
 import { cn } from '@/lib/utils'
@@ -21,8 +21,19 @@ function ArticlesSection({ articles }: Props) {
   // Load page number from localStorage when component mounts
   useEffect(() => {
     const savedPage = localStorage.getItem('currentPage')
+    const savedSortOption = localStorage.getItem('sortOption')
+    const savedFilterOption = localStorage.getItem('filterOption')
+
     if (savedPage) {
       setCurrentPage(Number(savedPage))
+    }
+
+    if (savedSortOption) {
+      setSortOption(savedSortOption)
+    }
+
+    if (savedFilterOption) {
+      setFilterOption(savedFilterOption)
     }
   }, [])
 
@@ -30,6 +41,14 @@ function ArticlesSection({ articles }: Props) {
   useEffect(() => {
     localStorage.setItem('currentPage', String(currentPage))
   }, [currentPage])
+
+  useEffect(() => {
+    localStorage.setItem('sortOption', sortOption ?? SORT_OPTIONS[0]!)
+  }, [sortOption])
+
+  useEffect(() => {
+    localStorage.setItem('filterOption', filterOption ?? FILTER_OPTIONS[0]!)
+  }, [filterOption])
 
   const sortedArticles = useMemo(() => {
     return [...articles].sort((a, b) => {
@@ -120,7 +139,7 @@ function ArticlesSection({ articles }: Props) {
             className="flex items-center justify-center gap-x-1 rounded-lg border border-neutral-300 px-2 py-1 text-sm font-medium dark:border-neutral-600 sm:gap-x-2 sm:px-4 sm:py-2 sm:text-base hover:bg-black/10 transition-all"
             onClick={() => setFilterOptionsOpen(!filterOptionsOpen)}
           >
-            <span>Newest</span>
+            <span>{sortOption}</span>
 
             <ChevronDown
               className={cn(

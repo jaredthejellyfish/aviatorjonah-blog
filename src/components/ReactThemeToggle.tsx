@@ -59,7 +59,7 @@ const ThemeToggle = () => {
     <div className='flex items-center justify-center'>
       <Button
         onClick={handleToggleClick}
-        className="bg-white text-black dark:hover:text-black hover:text-white w-[40px] h-[40px] p-0"
+        className="bg-white text-black dark:hover:text-black hover:text-white w-[40px] h-[40px] p-0 border-transparent"
       >
         <SunIcon className="h-[1.5rem] w-[1.3rem] dark:hidden" />
         <MoonIcon className="hidden h-5 w-5 dark:block" />

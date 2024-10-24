@@ -1,0 +1,39 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { Content as PrivacyPolicy } from '@/content/privacy.md'
+import ThemeToggle from '@/components/ReactThemeToggle'
+import Footer from '@/components/Footer.astro'
+import { Home } from 'lucide-astro'
+---
+
+<BaseLayout
+  title="Sign In - AviatorJonah"
+  description="Sign in to your AviatorJonah account to access courses and track your progress."
+>
+  <main class="min-h-screen bg-white dark:bg-black">
+    <!-- Navigation Bar -->
+    <nav
+      class="border-b border-gray-200 bg-white/50 px-6 py-4 dark:border-neutral-800 dark:bg-neutral-900/50"
+    >
+      <div class="flex items-center justify-between">
+        <a
+          href="/"
+          class="flex items-center gap-2 text-lg font-medium text-gray-900 transition-opacity hover:opacity-80 dark:text-white"
+        >
+          <Home class="h-5 w-5" />
+          <span>Back to Home</span>
+        </a>
+        <ThemeToggle client:load />
+      </div>
+    </nav>
+
+    <div class="flex min-h-[calc(100vh-64px)] items-center justify-center">
+      <article class="mx-5 mt-12 px-4 lg:mx-[200px]">
+        <div class="prose mb-8 !max-w-none dark:prose-invert">
+          <PrivacyPolicy />
+        </div>
+      </article>
+    </div>
+    <Footer />
+  </main>
+</BaseLayout>

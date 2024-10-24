@@ -1,21 +1,20 @@
-import { Circle, Search, User2 } from 'lucide-react'
+import { Circle } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 import type { Articles, ServerUser } from '@/lib/supabase'
 
 import Hamburger from './Hamburger'
 import ThemeToggle from './ReactThemeToggle'
+import ScrollAnimatedChevron from './ScrollAnimatedChevron'
 import SearchWithResults from './Search'
-import { Button } from './ui/button'
 import User from './User'
+import { Button } from './ui/button'
 
 type Props = {
   topThreeArticles: NonNullable<Articles>
   isLoggedIn: boolean
   user: ServerUser | null
 }
-
-
 
 function HeroSection({ topThreeArticles, isLoggedIn, user }: Props) {
   const [currentArticle, setCurrentArticle] = useState(0)
@@ -35,7 +34,7 @@ function HeroSection({ topThreeArticles, isLoggedIn, user }: Props) {
     <div className="w-full relative flex h-screen items-center justify-center p-2">
       <div className="absolute left-2 right-2 top-2 h-1/3 rounded-lg bg-gradient-to-b from-black/50 to-transparent">
         <div className="mt-1 flex h-20 w-full items-center justify-between px-0 pr-4 text-white sm:mt-4 sm:px-10">
-          <div className='flex flex-row items-center justify-start gap-x-10'>
+          <div className="flex flex-row items-center justify-start gap-x-10">
             <a href="/" className="flex items-center gap-6">
               <img
                 src="/logo.png"
@@ -59,7 +58,12 @@ function HeroSection({ topThreeArticles, isLoggedIn, user }: Props) {
               {isLoggedIn ? (
                 <User user={user} />
               ) : (
-                <Button variant="outline">Sign in</Button>
+                <Button
+                  variant="outline"
+                  className="h-10 ml-3 bg-white text-black border-transparent hover:bg-white/80 hover:text-black"
+                >
+                  Sign in
+                </Button>
               )}
             </a>
             <Hamburger />
@@ -69,10 +73,6 @@ function HeroSection({ topThreeArticles, isLoggedIn, user }: Props) {
       <div className="absolute bottom-2 left-2 right-2 flex h-1/3 items-end rounded-lg bg-gradient-to-t from-black/30 to-transparent justify-between">
         <div className="flex flex-col gap-4 p-4 text-white sm:p-10 w-full">
           <div className="relative -ml-1.5 flex max-w-[140px] items-center justify-center">
-            <div
-              className="absolute inset-0 rounded-full bg-neutral-700/80 backdrop-blur-md"
-              aria-hidden="true"
-            ></div>
             <div className="relative inline-block rounded-full px-4 py-1 text-sm font-medium text-white">
               <span className="text-lg">Destination</span>
             </div>
@@ -119,6 +119,7 @@ function HeroSection({ topThreeArticles, isLoggedIn, user }: Props) {
           </div>
         </div>
       </div>
+      <ScrollAnimatedChevron />
       <img
         src={topThreeArticles[currentArticle]?.image}
         alt={topThreeArticles[currentArticle]?.title}

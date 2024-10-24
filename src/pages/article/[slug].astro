@@ -9,8 +9,7 @@ import Footer from '@/components/Footer.astro'
 import SearchWithResults from '@/components/Search'
 import { Button } from '@/components/ui/button'
 import User from '@/components/User'
-
-
+import { Image } from 'astro:assets'
 const { slug } = Astro.params
 
 if (!slug) {
@@ -48,14 +47,16 @@ const { user } = isLoggedIn ? await getUser() : { user: null }
         class="absolute left-0 right-0 top-0 z-50 h-1/3 rounded-lg bg-gradient-to-b from-black/50 to-transparent"
       >
         <div
-          class="mt-1 flex h-20 w-full items-center justify-between px-0 pr-4 text-white sm:mt-4 sm:px-10 z-50"
+          class="z-50 mt-1 flex h-20 w-full items-center justify-between px-0 pr-4 text-white sm:mt-4 sm:px-10"
         >
           <div class="flex flex-row items-center justify-start gap-x-10">
             <a href="/" class="flex items-center gap-6">
-              <img
+              <Image
+                height={56}
+                width={160}
                 src="/logo.png"
                 alt="logo"
-                class="h-14 w-40 scale-75 object-cover sm:scale-100"
+                class="h-14 w-40 object-cover sm:h-10 sm:w-28"
               />
             </a>
 
@@ -75,7 +76,12 @@ const { user } = isLoggedIn ? await getUser() : { user: null }
                 isLoggedIn ? (
                   <User user={user} />
                 ) : (
-                  <Button variant="outline">Sign in</Button>
+                  <Button
+                    variant="outline"
+                    className="h-10 ml-3 bg-white text-black border-transparent hover:bg-white/80 hover:text-black"
+                  >
+                    Sign in
+                  </Button>
                 )
               }
             </a>
